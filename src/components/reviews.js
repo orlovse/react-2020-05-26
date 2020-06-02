@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Rate from './rate';
 
 export default function Reviews(props) {
-  let sum = props.reviews.reduce((sum, review) => sum + review.rating, 0);
-  let averageRating = (sum / props.reviews.length).toFixed(1);
+  const averageRating = useMemo(() => {
+    let sum = props.reviews.reduce((sum, review) => sum + review.rating, 0);
+    return (sum / props.reviews.length).toFixed(1);
+  }, [props.reviews]);
+
   return (
     <div>
       <p>Average rating: {averageRating}</p>
