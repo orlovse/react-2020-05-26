@@ -24,11 +24,13 @@ describe('Product', () => {
     component.find('[data-id="product-increment"]').simulate('click');
     expect(component.find('[data-id="product-amount"]').text()).toBe('1');
   });
-  it('should decrement amount', () => {
+  it('should not decrement when amount === 0', () => {
     const component = mount(<Product product={product} />);
     component.find('[data-id="product-decrement"]').simulate('click');
     expect(component.find('[data-id="product-amount"]').text()).toBe('0');
-
+  });
+  it('should decrement amount', () => {
+    const component = mount(<Product product={product} />);
     component.find('[data-id="product-increment"]').simulate('click');
     component.find('[data-id="product-increment"]').simulate('click');
     component.find('[data-id="product-decrement"]').simulate('click');
