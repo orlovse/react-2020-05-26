@@ -7,7 +7,7 @@ const Review = ({ user, text, rating }) => (
   <div className={styles.review} data-id="review">
     <div className={styles.content}>
       <div>
-        <h4 className={styles.name} data-id="review-name">
+        <h4 className={styles.name} data-id="review-user">
           {user}
         </h4>
         <p className={styles.comment} data-id="review-text">
@@ -20,6 +20,12 @@ const Review = ({ user, text, rating }) => (
     </div>
   </div>
 );
+
+Review.propTypes = {
+  user: PropTypes.string,
+  text: PropTypes.string,
+  rating: PropTypes.number.isRequired,
+};
 
 Review.defaultProps = {
   user: 'Anonymous',

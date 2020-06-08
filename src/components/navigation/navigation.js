@@ -21,7 +21,7 @@ Navigation.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-    })
+    }).isRequired
   ).isRequired,
   onRestaurantClick: PropTypes.func.isRequired,
 };

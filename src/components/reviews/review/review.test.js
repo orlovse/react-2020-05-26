@@ -1,30 +1,46 @@
 import React from 'react';
-import Enzyme, { mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
+import { restaurants } from '../../../fixtures';
+import { mount } from 'enzyme';
 import Review from './review';
 
-import { restaurants } from '../../../fixtures';
-
-const review = restaurants[0].reviews[0];
-
-Enzyme.configure({ adapter: new Adapter() });
+const review = restaurants[0].reviews[1];
 
 describe('Review', () => {
-  it('should be render', () => {
-    const component = mount(<Review {...review} />);
-    expect(component.find('[data-id="review"]').length).toBe(1);
+  let component, name, text, rate;
+
+  beforeEach(() => {
+    component = mount(<Review {...review} />);
+    name = component.find('[data-id="review-user"]').text();
+    text = component.find('[data-id="review-text"]').text();
+    rate = component.find('[data-id="full-star"]').length;
   });
-  it('should be a name', () => {
-    const component = mount(<Review {...review} />);
-    expect(component.find('[data-id="review-name"]').length).toBe(1);
+
+  it('should render review', () => {
+    expect(component.find('Review').length).toBe(1);
   });
-  it('should be a text', () => {
-    const component = mount(<Review {...review} />);
-    expect(component.find('[data-id="review-text"]').length).toBe(1);
+
+  it('should render user name', () => {
+    expect(name).toBe(review.user);
   });
-  it('should be a rating', () => {
-    const component = mount(<Review {...review} />);
-    expect(component.find('[data-id="review-rating"]').length).toBe(1);
+
+  it('should render text', () => {
+    expect(text).toBe(review.text);
+  });
+
+  it(`should render ${review.rating} fulled stars`, () => {
+    expect(rate).toBe(review.rating);
+  });
+});
+
+describe('Anonymous Review', () => {
+  let component, name;
+
+  beforeEach(() => {
+    component = mount(<Review text={review.text} rating={review.rating} />);
+    name = component.find('[data-id="review-user"]').text();
+  });
+
+  it('should render anonymous name', () => {
+    expect(name).toBe('Anonymous');
   });
 });

@@ -16,10 +16,10 @@ const Banner = ({ img = DefaultBanner, heading, description, children }) => (
 );
 
 Banner.propTypes = {
+  img: PropTypes.string,
   heading: PropTypes.string,
-  // img: PropTypes.element,
-  // description: PropTypes.string,
-  // choldren: PropTypes.
+  description: PropTypes.string,
+  children: PropTypes.element,
 };
 
 export default Banner;
