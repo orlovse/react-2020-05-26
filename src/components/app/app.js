@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Restaurants from '../restaurants';
 import Header from '../header';
+import Order from '../order';
 
 export default class App extends PureComponent {
   static propTypes = {
@@ -11,7 +12,7 @@ export default class App extends PureComponent {
     return (
       <div>
         <Header />
-        {/* <Order /> */}
+        <Order />
         <Restaurants restaurants={this.props.restaurants} />
       </div>
     );
