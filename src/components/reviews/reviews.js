@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import PropTypes from 'prop-types';
 import ReviewForm from './review-form';
 import Review from './review';
 import styles from './reviews.module.css';
+import './reviews.css';
 
 import { loadReviews, loadUsers } from '../../redux/actions';
 import {
@@ -31,9 +33,13 @@ const Reviews = ({
 
   return (
     <div className={styles.reviews}>
-      {reviews.map((id) => (
-        <Review key={id} id={id} />
-      ))}
+      <TransitionGroup>
+        {reviews.map((id) => (
+          <CSSTransition key={id} timeout={500} classNames="review-animation">
+            <Review key={id} id={id} />
+          </CSSTransition>
+        ))}
+      </TransitionGroup>
       <ReviewForm restaurantId={restaurantId} />
     </div>
   );
